@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastrar-se</title>
+<style>
+/* Your CSS styles here */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.register-box {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.register-box:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.links {
+  text-align: center;
+}
+
+.links a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="register-box">
+    <h2>Cadastrar-se</h2>
+    <input type="text" id="fullname" placeholder="Nome Completo">
+    <input type="text" id="username" placeholder="Usuário (máx. 12 caracteres)" maxlength="12">
+    <input type="email" id="email" placeholder="E-mail">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="register()">Cadastrar</button>
+    <div class="links">
+      <a href="login.html">Voltar para o Login</a>
+    </div>
+  </div>
+</div>
+<script>
+function register() {
+  var fullname = document.getElementById('fullname').value;
+  var username = document.getElementById('username').value;
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+
+  // Extract first name
+  var firstName = fullname.split(' ')[0];
+
+  // Create user object
+  var user = {
+    fullname: fullname,
+    username: username,
+    email: email,
+    password: password
+  };
+
+  // Save user object to local storage
+  localStorage.setItem('user', JSON.stringify(user));
+
+  // Show alert with first name
+  alert('Cadastro realizado com sucesso! Bem-vindo, ' + firstName + '.');
+
+  // Redirect to login page
+  window.location.href = 'index.html'; // Assuming index.html is your login page
+}
+</script>
+</body>
+</html>

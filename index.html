@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<style>
+/* Your CSS styles here */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.login-box:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+input[type="text"],
+input[type="password"],
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.links {
+  text-align: center;
+}
+
+.links a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #333;
+}
+
+.redirecting {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px; /* Adjust as needed */
+  display: none;
+}
+
+.redirecting.show {
+  display: block;
+}
+
+.redirecting .dots {
+  display: inline-block;
+  margin-left: 5px; /* Adjust as needed */
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="login-box" id="loginBox">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário (máx. 12 caracteres)" maxlength="12">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div class="links">
+      <a href="reset-password.html">Esqueci minha senha</a>
+      <span> ou </span>
+      <a href="register.html">Cadastre-se</a>
+    </div>
+  </div>
+  <div class="redirecting" id="redirecting">
+    Redirecionando<span class="dots">.</span><span class="dots" style="animation-delay: 0.2s">.</span><span class="dots" style="animation-delay: 0.4s">.</span>
+  </div>
+</div>
+<script>
+function login() {
+  var storedUser = localStorage.getItem('user');
+  if (!storedUser) {
+    alert('Nenhum usuário registrado. Por favor, registre-se primeiro.');
+    return;
+  }
+
+  var inputUsername = document.getElementById('username').value;
+  var inputPassword = document.getElementById('password').value;
+  var user = JSON.parse(storedUser);
+
+  if (inputUsername === user.username && inputPassword === user.password) {
+    var firstName = user.fullname.split(' ')[0]; // Extract first name
+    alert('Login bem-sucedido! Bem-vindo, ' + firstName + '.');
+
+    // Hide login box and show redirecting message
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('redirecting').classList.add('show');
+    // Redirect to another page or perform other actions upon successful login
+  } else {
+    alert('Usuário ou senha incorretos. Por favor, tente novamente.');
+  }
+}
+</script>
+</body>
+</html>
